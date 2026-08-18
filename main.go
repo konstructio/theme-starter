@@ -1,5 +1,5 @@
-// kontract-theme-starter — the smallest possible kontract theme.
-// Serves the static frontend; all kontract logic lives in the browser.
+// theme-starter — the smallest possible theme theme.
+// Serves the static frontend; all theme logic lives in the browser.
 //
 // Assets are embedded in the binary (go:embed) because cloud-native
 // buildpacks strip source files from the final image — a bare
@@ -28,7 +28,7 @@ func main() {
 		log.Fatal(err)
 	}
 	http.Handle("/", requestLog(http.FileServer(http.FS(static))))
-	log.Printf("kontract-starter serving on :%s", port)
+	log.Printf("theme-starter serving on :%s", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
