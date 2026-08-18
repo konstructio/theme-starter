@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kontract Starter · Konstruct</title>
-<link rel="icon" href="kontract-icon.png" />
+<title>Theme Starter · Konstruct</title>
+<link rel="icon" href="theme-icon.png" />
 <style>
   :root{
     --bg:#111518; --panel:#161b1f; --panel2:#192124; --line:#26313a; --line2:#38454f;
@@ -193,7 +193,7 @@
   <header>
     <div class="brand">
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.6" fill="var(--green)" stroke="none"/></svg>
-      Kontract Starter
+      Theme Starter
     </div>
     <span class="tag">reference theme</span>
     <div class="spacer"></div>
@@ -202,7 +202,7 @@
   <div id="root">loading…</div>
 </div>
 
-<script src="kontract.js"></script>
+<script src="theme.js"></script>
 <script>
   const root = document.getElementById("root");
   const DOCS = "https://konstruct.civo.com/docs/next/konduit";
@@ -216,7 +216,7 @@
 
 
 
-  // ---- capability + profile content (kept in sync with kontract.js) ----
+  // ---- capability + profile content (kept in sync with theme.js) ----
   const CAPS = [
     { title:"Observe", badge:"read", cls:"read", ops:[
       ["discover","what your org is, its entitled app sizes, and which capabilities it exposes"],
@@ -254,7 +254,7 @@
 
   function capCol(c){
     return `<div class="capcol"><div class="ch"><span class="t">${c.title}</span><span class="badge ${c.cls}">${c.badge}</span></div>
-      ${c.ops.map(([n,d]) => `<div class="op"><code>kontract.${esc(n)}()</code><span class="od">${esc(d)}</span></div>`).join("")}</div>`;
+      ${c.ops.map(([n,d]) => `<div class="op"><code>theme.${esc(n)}()</code><span class="od">${esc(d)}</span></div>`).join("")}</div>`;
   }
   function profCard(p){
     return `<div class="prof"><div class="pn">${esc(p.name)}</div><div class="pt">${esc(p.t)}</div><div class="pd">${esc(p.d)}</div><div class="eg">${esc(p.eg)}</div></div>`;
@@ -262,12 +262,12 @@
 
   function docLinks(){
     const L = [
-      ["The kontract", "The postMessage contract, transport and security model", "/kontract"],
+      ["The theme", "The postMessage contract, transport and security model", "/theme"],
       ["Themes", "What a theme is and how it's delivered", "/themes"],
       ["Creating a theme", "Build one by hand, step by step", "/creating-a-theme"],
       ["Theme specification", "The conformance checklist every theme meets", "/theme-spec"],
       ["The game formula", "Turn a PaaS into progression and play", "/game-formula"],
-      ["This theme", "The Kontract Starter reference", "/themes/starter"],
+      ["This theme", "The Theme Starter reference", "/themes/starter"],
     ];
     return `<div class="doclinks">${L.map(([t,d,p]) =>
       `<a class="doclink" href="${DOCS}${p}" target="_blank" rel="noopener"><span class="dt">${t} →</span><span class="dd">${d}</span></a>`).join("")}</div>`;
@@ -276,7 +276,7 @@
   function renderWelcome(){
     root.innerHTML = `
       <div class="hero">
-        <h1>This is a <b>kontract theme</b>.</h1>
+        <h1>This is a <b>theme theme</b>.</h1>
         <p>A theme is a frontend that lives in its own Git repository and is built, deployed and served by Konstruct's own delivery pipeline. Launched from the platform, it renders your organization's <b>zones</b> (the capacity you own) and <b>apps</b> (the things you ship) — as any metaphor its author chooses: planets, city blocks, race teams, or a plain business console like this one.</p>
         <p class="hero-meta mono" style="color:var(--mut);margin-top:14px">You're viewing the starter directly, so it's showing this guide. Launch it from Konstruct and it comes alive with your real data.</p>
       </div>
@@ -285,11 +285,11 @@
       <div class="flow">
         <div class="node self"><div class="n">Your theme</div><div class="b">Sandboxed iframe</div><div class="d">Runs on Konstruct infrastructure with no credentials, no token, nothing in storage.</div></div>
         <div class="arrow"><div class="a">→</div><div class="l">postMessage<br/>(no secrets)</div></div>
-        <div class="node"><div class="n">Konstruct</div><div class="b">The broker</div><div class="d">Validates the sender, allows only kontract ops, and pins every call to the org you were launched for.</div></div>
+        <div class="node"><div class="n">Konstruct</div><div class="b">The broker</div><div class="d">Validates the sender, allows only theme ops, and pins every call to the org you were launched for.</div></div>
         <div class="arrow"><div class="a">→</div><div class="l">your session<br/>on its origin</div></div>
         <div class="node"><div class="n">Platform</div><div class="b">The API</div><div class="d">Performs the real call as the signed-in user and replies to your theme's origin only.</div></div>
       </div>
-      <div class="note">Your theme never touches a credential. It asks for data; the platform does the work and hands back the result. That's the whole contract — and it's why a theme can be a public, forkable web page and still be safe. <a href="${DOCS}/kontract" target="_blank" rel="noopener">Read the contract →</a></div>
+      <div class="note">Your theme never touches a credential. It asks for data; the platform does the work and hands back the result. That's the whole contract — and it's why a theme can be a public, forkable web page and still be safe. <a href="${DOCS}/theme" target="_blank" rel="noopener">Read the contract →</a></div>
 
       <div class="section-h">What you can build with the contract<span></span></div>
       <div class="caps">${CAPS.map(capCol).join("")}</div>
@@ -305,16 +305,16 @@
 
       <div class="section-h">Make it your own<span></span></div>
       <div class="panel steps">
-        <div class="step"><div class="num"></div><div class="sc"><b>Get a copy.</b> Fork this repository — or open <b>Kontract Settings</b> in Konstruct and let the <b>Forge</b> generate a whole new theme from a description.</div></div>
-        <div class="step"><div class="num"></div><div class="sc"><b>Replace this UI.</b> Everything you see is in <code>static/index.html</code>. Build your metaphor there. Keep <code>kontract.js</code> exactly as-is — it's the client for the contract above.</div></div>
+        <div class="step"><div class="num"></div><div class="sc"><b>Get a copy.</b> Fork this repository — or open <b>Theme Settings</b> in Konstruct and let the <b>Forge</b> generate a whole new theme from a description.</div></div>
+        <div class="step"><div class="num"></div><div class="sc"><b>Replace this UI.</b> Everything you see is in <code>static/index.html</code>. Build your metaphor there. Keep <code>theme.js</code> exactly as-is — it's the client for the contract above.</div></div>
         <div class="step"><div class="num"></div><div class="sc"><b>Push.</b> Konstruct watches your repo, rebuilds the image and redeploys automatically. No chart, no pipeline to wire up.</div></div>
-        <div class="step"><div class="num"></div><div class="sc"><b>Register &amp; launch.</b> Point Konstruct at your repo, launch it, and your theme renders live org data. Read <code>KONTRACT.md</code> in this repo, or the docs, to go deeper.</div></div>
+        <div class="step"><div class="num"></div><div class="sc"><b>Register &amp; launch.</b> Point Konstruct at your repo, launch it, and your theme renders live org data. Read <code>THEME.md</code> in this repo, or the docs, to go deeper.</div></div>
       </div>
 
       <div class="section-h">Documentation<span></span></div>
       ${docLinks()}
 
-      <footer><span>Kontract Starter · the reference theme</span><span class="chip">informational</span><span>powered by</span><span class="chip">Konstruct</span></footer>`;
+      <footer><span>Theme Starter · the reference theme</span><span class="chip">informational</span><span>powered by</span><span class="chip">Konstruct</span></footer>`;
   }
 
   // ── launched mode: a read-only live operations dashboard ─────────────────
@@ -392,11 +392,11 @@
     const url = typeof a.status?.url === "string" && a.status.url.startsWith("https://") ? a.status.url : "";
     const sp = S.sparks[name] || {};
     const cpuLast = lastOf(sp.cpu || []), memLast = lastOf(sp.mem || []);
-    // themes serve their own face at /kontract-icon.(svg|png); other apps get
+    // themes serve their own face at /theme-icon.(svg|png); other apps get
     // a monogram so every card has the same anatomy
     const initial = esc(String(a.app_name || name).charAt(0).toUpperCase());
     const avatar = url && (a.status && "url_ready" in a.status ? a.status.url_ready : true)
-      ? `<span class="ava"><span class="avaM">${initial}</span><img src="${esc(url)}/kontract-icon.svg" alt="" loading="lazy" onerror="if(!this.dataset.p){this.dataset.p=1;this.src='${esc(url)}/kontract-icon.png'}else{this.style.display='none'}"></span>`
+      ? `<span class="ava"><span class="avaM">${initial}</span><img src="${esc(url)}/theme-icon.svg" alt="" loading="lazy" onerror="if(!this.dataset.p){this.dataset.p=1;this.src='${esc(url)}/theme-icon.png'}else{this.style.display='none'}"></span>`
       : `<span class="ava"><span class="avaM">${initial}</span></span>`;
     return `<div class="appcard${S.selected === name ? " sel" : ""}" data-app="${esc(name)}">
       <div class="top">${avatar}<span class="st ${esc(ph)}"><span class="dot"></span>${esc(ph)}</span><span class="an">${esc(a.app_name || name)}</span>
@@ -435,8 +435,8 @@
   function openLogs(name){
     closeLogs();
     S.logLines = []; S.logState = "connecting";
-    if (!S.caps.includes("runtime-logs") || typeof kontract.logs !== "function") { S.logState = "unavailable"; paintLogs(); return; }
-    S.logSub = kontract.logs(org, name, (l) => {
+    if (!S.caps.includes("runtime-logs") || typeof theme.logs !== "function") { S.logState = "unavailable"; paintLogs(); return; }
+    S.logSub = theme.logs(org, name, (l) => {
       const pod = l && l.pod ? `[${String(l.pod).slice(-12)}] ` : "◆ ";
       const line = l && (l.line ?? l.message) != null ? String(l.line ?? l.message) : String(l);
       S.logLines.push(pod + line);
@@ -464,7 +464,7 @@
     box.style.display = "";
     const dUrl = typeof a.status?.url === "string" && a.status.url.startsWith("https://") ? a.status.url : "";
     const dAva = dUrl && (a.status && "url_ready" in a.status ? a.status.url_ready : true)
-      ? `<span class="ava"><span class="avaM">${esc(String(a.app_name || name).charAt(0).toUpperCase())}</span><img src="${esc(dUrl)}/kontract-icon.svg" alt="" onerror="if(!this.dataset.p){this.dataset.p=1;this.src='${esc(dUrl)}/kontract-icon.png'}else{this.style.display='none'}"></span>`
+      ? `<span class="ava"><span class="avaM">${esc(String(a.app_name || name).charAt(0).toUpperCase())}</span><img src="${esc(dUrl)}/theme-icon.svg" alt="" onerror="if(!this.dataset.p){this.dataset.p=1;this.src='${esc(dUrl)}/theme-icon.png'}else{this.style.display='none'}"></span>`
       : "";
     box.innerHTML = `<h2 style="margin:0 0 4px;display:flex;align-items:center;gap:10px;font-size:13px">${dAva}${esc(a.app_name || name)}
         <span class="chip">${esc(a.environment || "")}</span><button class="closebtn" id="detclose">close ×</button></h2>
@@ -490,7 +490,7 @@
     document.getElementById("detclose").onclick = () => { S.selected = null; closeLogs(); box.style.display = "none"; paintApps(); };
     document.getElementById("logrec").onclick = () => openLogs(name);
     openLogs(name);
-    kontract.buildLogs(org, name).then((bl) => {
+    theme.buildLogs(org, name).then((bl) => {
       const el = document.getElementById("buildpre");
       if (el) el.textContent = ((bl && bl.logs) || "").split("\n").slice(-40).join("\n").trim() || "(no build output recorded)";
     }).catch(() => {});
@@ -502,8 +502,8 @@
   function paintDeployments(name, branch, runningImage){
     const el = document.getElementById("deployTl");
     if (!el) return;
-    if (typeof kontract.deployments !== "function") { el.innerHTML = '<div class="item mono" style="color:var(--mut2);border-top:none">not available on this install</div>'; return; }
-    kontract.deployments(org, name).then((list) => {
+    if (typeof theme.deployments !== "function") { el.innerHTML = '<div class="item mono" style="color:var(--mut2);border-top:none">not available on this install</div>'; return; }
+    theme.deployments(org, name).then((list) => {
       const box = document.getElementById("deployTl");
       if (!box || S.selected !== name) return;
       const items = Array.isArray(list) ? list : [];
@@ -533,7 +533,7 @@
   async function refreshDetailCharts(name){
     if (S.selected !== name) return;
     try {
-      const m = await kontract.metrics(org, name, { range: "1h", step: "60s" });
+      const m = await theme.metrics(org, name, { range: "1h", step: "60s" });
       if (S.selected !== name) return;
       const cpu = seriesVals(m, "cpu"), cpuLim = lastOf(seriesVals(m, "cpu_limit"));
       const mem = seriesVals(m, "memory"), memLim = lastOf(seriesVals(m, "memory_limit"));
@@ -607,7 +607,7 @@
       const name = a.name || a.app_name;
       if ((a.status?.phase) !== "Live" && (a.status?.phase) !== "Failed") continue;
       try {
-        const m = await kontract.metrics(org, name, { range: "1h", step: "2m" });
+        const m = await theme.metrics(org, name, { range: "1h", step: "2m" });
         S.sparks[name] = { cpu: seriesVals(m, "cpu"), mem: seriesVals(m, "memory") };
       } catch (e) {}
     }
@@ -651,9 +651,9 @@
   async function refreshData(){
     try {
       const [zonesR, appsR, quotaR] = await Promise.all([
-        kontract.zones(org).catch(() => []),
-        kontract.apps(org).catch(() => []),
-        S.caps.includes("quota") ? kontract.quota(org).catch(() => null) : Promise.resolve(null),
+        theme.zones(org).catch(() => []),
+        theme.apps(org).catch(() => []),
+        S.caps.includes("quota") ? theme.quota(org).catch(() => null) : Promise.resolve(null),
       ]);
       S.zones = Array.isArray(zonesR) ? zonesR : (zonesR.zones || []);
       S.apps = Array.isArray(appsR) ? appsR : (appsR.apps || []);
@@ -680,17 +680,17 @@
 
   async function renderLive(){
     root.innerHTML = `<div class="live-banner"><span class="dot" style="width:8px;height:8px;border-radius:50%"></span>
-      Live — a read-only operations view of <b style="color:var(--ink)">&nbsp;${esc(org)}&nbsp;</b>, rendered entirely through the kontract. <a href="${DOCS}" target="_blank" rel="noopener">&nbsp;What is this? →</a></div>
+      Live — a read-only operations view of <b style="color:var(--ink)">&nbsp;${esc(org)}&nbsp;</b>, rendered entirely through the theme. <a href="${DOCS}" target="_blank" rel="noopener">&nbsp;What is this? →</a></div>
       <div class="fleet" id="fleetP"></div>
       <div class="panel"><h2 id="orgH">Organization</h2><div class="sub" id="capsLine" style="display:none"></div><div id="quotaP"></div><div id="refP"></div></div>
       <div class="panel"><h2>Environments &amp; applications <span class="sub" style="margin:0;font-weight:400">· click an app for live telemetry &amp; history</span></h2><div id="appsP">loading…</div></div>
       <div class="panel" id="detailP" style="display:none"></div>
       <div class="panel" style="border-left:2px solid var(--green)"><h2>This is the starter</h2>
-        <div class="sub">A fully hydrated, read-only reference: quota, environments, apps, real deployment history, per-app metrics with limit ceilings, pods &amp; restarts, live runtime logs, and build output — every read the kontract offers, nothing invented. Fork it and make it yours.</div>
-        <div class="item" style="border-top:none;gap:16px"><a href="${DOCS}/creating-a-theme" target="_blank" rel="noopener">Creating a theme →</a><a href="${DOCS}/theme-spec" target="_blank" rel="noopener">Theme spec →</a><a href="${DOCS}/kontract" target="_blank" rel="noopener">The kontract →</a></div></div>
-      <footer><span>Kontract Starter · the reference theme</span><span class="chip">informational</span></footer>`;
+        <div class="sub">A fully hydrated, read-only reference: quota, environments, apps, real deployment history, per-app metrics with limit ceilings, pods &amp; restarts, live runtime logs, and build output — every read the theme offers, nothing invented. Fork it and make it yours.</div>
+        <div class="item" style="border-top:none;gap:16px"><a href="${DOCS}/creating-a-theme" target="_blank" rel="noopener">Creating a theme →</a><a href="${DOCS}/theme-spec" target="_blank" rel="noopener">Theme spec →</a><a href="${DOCS}/theme" target="_blank" rel="noopener">The theme →</a></div></div>
+      <footer><span>Theme Starter · the reference theme</span><span class="chip">informational</span></footer>`;
     try {
-      const d = await kontract.discover(org);
+      const d = await theme.discover(org);
       S.caps = d.capabilities || [];
       const h = document.getElementById("orgH");
       if (h) h.textContent = d.org?.display_name || org;
@@ -699,7 +699,7 @@
       const CAP_HINTS = {
         "apps": "list, ship, update, and remove apps",
         "zones": "environments to ship into",
-        "themes": "install and register kontract themes",
+        "themes": "install and register theme themes",
         "character": "cross-theme progression ledger",
         "runtime-logs": "live pod log streaming (the panel below)",
         "quota": "the org allowance meter above",
@@ -717,24 +717,24 @@
       S.sizes = d.app_sizes || [];
       S.rates = d.rates || {};
       paintRef(d);
-      if (typeof kontract.regions === "function") {
-        kontract.regions(org).then((r) => { S.regions = Array.isArray(r) ? r : []; paintFleet(); }).catch(() => {});
+      if (typeof theme.regions === "function") {
+        theme.regions(org).then((r) => { S.regions = Array.isArray(r) ? r : []; paintFleet(); }).catch(() => {});
       }
       // the signed-in user's cross-theme progression ledger — read-only, and a
       // live demonstration of the character op every theme shares
-      if (S.caps.includes("character") && typeof kontract.character === "function") {
-        kontract.character(org).then((c) => {
+      if (S.caps.includes("character") && typeof theme.character === "function") {
+        theme.character(org).then((c) => {
           if (!c || (!c.level && !(c.inventory || []).length && !(c.quests || []).length)) return;
           const f = document.querySelector("footer");
           if (f) f.insertAdjacentHTML("afterbegin",
-            `<span class="mono" title="kontract.character() — the progression ledger shared by every theme in this org">your character: ${c.display_name ? esc(c.display_name) + " · " : ""}${c.level ? `LV ${esc(c.level)} · ` : ""}${c.xp ? `${esc(c.xp)} XP · ` : ""}${(c.inventory || []).length} item${(c.inventory || []).length === 1 ? "" : "s"} · ${(c.quests || []).length} quest${(c.quests || []).length === 1 ? "" : "s"} done</span>`);
+            `<span class="mono" title="theme.character() — the progression ledger shared by every theme in this org">your character: ${c.display_name ? esc(c.display_name) + " · " : ""}${c.level ? `LV ${esc(c.level)} · ` : ""}${c.xp ? `${esc(c.xp)} XP · ` : ""}${(c.inventory || []).length} item${(c.inventory || []).length === 1 ? "" : "s"} · ${(c.quests || []).length} quest${(c.quests || []).length === 1 ? "" : "s"} done</span>`);
         }).catch(() => {});
       }
       await refreshData();
       refreshSparks();
       // Push-driven refresh when the platform supports it; poll fallback.
-      if (S.caps.includes("app-events") && typeof kontract.appEvents === "function") {
-        S.evtSub = kontract.appEvents(org, () => refreshData(), () => { S.evtSub = null; });
+      if (S.caps.includes("app-events") && typeof theme.appEvents === "function") {
+        S.evtSub = theme.appEvents(org, () => refreshData(), () => { S.evtSub = null; });
       }
     } catch (e) {
       root.innerHTML += `<div class="panel"><h2>Couldn't load your org</h2><div class="err">${esc(e && e.message || e)}</div></div>`;
@@ -742,14 +742,14 @@
   }
 
   function render(){
-    if (!kontract.isLaunched()) { renderWelcome(); return; }
+    if (!theme.isLaunched()) { renderWelcome(); return; }
     renderLive();
   }
   render();
   // Steady refresh: data every 15s (skipped when push events are flowing),
   // sparklines + open detail charts every 30s. The welcome guide is static.
-  setInterval(() => { if (kontract.isLaunched() && !S.evtSub) refreshData(); }, 15000);
-  setInterval(() => { if (kontract.isLaunched()) { refreshSparks(); if (S.selected) refreshDetailCharts(S.selected); } }, 30000);
+  setInterval(() => { if (theme.isLaunched() && !S.evtSub) refreshData(); }, 15000);
+  setInterval(() => { if (theme.isLaunched()) { refreshSparks(); if (S.selected) refreshDetailCharts(S.selected); } }, 30000);
 </script>
 </body>
 </html>

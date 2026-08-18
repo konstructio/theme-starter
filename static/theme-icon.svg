@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Kontract Starter: the reference mark — a calibration target with one
+  <!-- Theme Starter: the reference mark — a calibration target with one
        live signal. Bold at 36px on #10161d. -->
   <circle cx="32" cy="32" r="26" fill="none" stroke="#2b3a44" stroke-width="3"/>
   <circle cx="32" cy="32" r="26" fill="none" stroke="#00ff6f" stroke-width="3"
