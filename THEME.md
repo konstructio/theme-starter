@@ -30,7 +30,8 @@ what it does for you.
 
 Allowed ops: `discover`, `zones`, `createZone`, `apps`, `appRepos`,
 `shipApp`, `updateApp`, `deleteApp`, `redeploy`, `buildLogs`, `metrics`,
-`quota`, `character`, `saveCharacter`.
+`quota`, `character`, `saveCharacter`, `forgeSite`, `forgeSiteJob`,
+`forgeSiteJobs`.
 
 ## Streams (push, not request/response)
 
@@ -55,8 +56,8 @@ sees a credential.
 
 `discover().capabilities` lists what this platform implements. Only offer a
 feature when its flag is present: `runtime-logs`, `quota`, `app-events`,
-`volumes`, `custom-domains` (plus the original `apps`, `zones`, `themes`,
-`character`).
+`volumes`, `custom-domains`, `site-forge` (plus the original `apps`, `zones`,
+`themes`, `character`).
 
 ## Newer app fields
 
@@ -79,6 +80,27 @@ feature when its flag is present: `runtime-logs`, `quota`, `app-events`,
 - `zones()` ordering is a contract guarantee: creation order, oldest first.
   Render the list as given — do not re-sort — so every theme agrees on
   environment order.
+
+## Site forge (capability: `site-forge`)
+
+When `discover().capabilities` includes `site-forge`, the platform can
+generate a complete static website from interview answers and push it to
+git — the theme then ships the repo like any other app.
+
+- `theme.forgeSite(org, {name, kind, vibe, headline, extras})` starts a job.
+  `kind` is `portfolio | blog | landing | docs`; `name` a lowercase RFC-1123
+  label. Returns the job `{id, phase, …}`.
+- `theme.forgeSiteJob(org, id)` polls it. Phases: `Designing → Writing →
+  Pushing → Ready | Failed`. `phase_started_at` + `message` (heartbeat with
+  elapsed) power honest progress UI; `brief` is the design brief once
+  drafted. On `Ready`, `repo_url`/`repo_name` are exactly what `shipApp`
+  needs.
+- `theme.forgeSiteJobs(org)` lists jobs newest-first (rehydration).
+
+The job does NOT register the app: call `shipApp({repo_url, repo_name,
+zone_ref, region, size, port: 8080, public_url_enabled: true})` yourself
+once Ready, then follow the app's build via `apps`/`deployments`/`buildLogs`.
+Without the capability flag, hide the feature entirely.
 
 v1 themes (token-in-fragment + direct API fetch) stop working once the
 platform removes theme-origin CORS: replace your copy of `theme.js` with
