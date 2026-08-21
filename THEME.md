@@ -31,7 +31,7 @@ what it does for you.
 Allowed ops: `discover`, `zones`, `createZone`, `apps`, `appRepos`,
 `shipApp`, `updateApp`, `deleteApp`, `redeploy`, `buildLogs`, `metrics`,
 `quota`, `character`, `saveCharacter`, `forgeSite`, `forgeSiteJob`,
-`forgeSiteJobs`.
+`forgeSiteJobs`, `inferSite`, `forgeSiteUpdate`, `domainStatus`.
 
 ## Streams (push, not request/response)
 
@@ -56,8 +56,8 @@ sees a credential.
 
 `discover().capabilities` lists what this platform implements. Only offer a
 feature when its flag is present: `runtime-logs`, `quota`, `app-events`,
-`volumes`, `custom-domains`, `site-forge` (plus the original `apps`, `zones`,
-`themes`, `character`).
+`volumes`, `custom-domains`, `site-forge`, `site-update`, `domain-status`
+(plus the original `apps`, `zones`, `themes`, `character`).
 
 ## Newer app fields
 
@@ -101,6 +101,31 @@ The job does NOT register the app: call `shipApp({repo_url, repo_name,
 zone_ref, region, size, port: 8080, public_url_enabled: true})` yourself
 once Ready, then follow the app's build via `apps`/`deployments`/`buildLogs`.
 Without the capability flag, hide the feature entirely.
+
+v2 additions:
+
+- `forgeSite` requests are free-text-first: `{name, headline, prompt}` where
+  `prompt` is whatever the user typed (any site type). The v1 `kind` field is
+  accepted but no longer an enum.
+- `theme.inferSite(org, {prompt})` → `{name, headline, summary}` —
+  synchronous guesses for a confirm screen. It can 503/fail; always keep a
+  local slug fallback so the flow never dead-ends.
+- `theme.forgeSiteUpdate(org, {name, instruction})` (capability
+  `site-update`) → an update job (`type: "update"`, phases `Reading →
+  Writing → Pushing → Ready | Failed`) that commits the change to the site
+  repo's `main` WITHOUT force — user commits are never erased, and the
+  platform rebuilds automatically (watch `deployments` for `reason:
+  "COMMIT"`). One running update per site; a second gets 409. Omitted files
+  keep their contents — updates cannot delete files.
+- `theme.domainStatus(org, name)` (capability `domain-status`) → the live
+  public-resolver view of the app's custom-domain wiring:
+  `{domain, txt_record, txt_expected, txt_ok, verified, cname_target,
+  resolved_target, cname_ok, serving, checked_at}`. Render a copy-paste
+  record checklist from it, and NEVER present the domain as a clickable link
+  before `serving` is true — resolver caches lie, especially the user's.
+- Forged sites are identifiable by convention: `repo_url` contains
+  `/site-<org>-`. The convention (plus a `konduit-site` GitLab topic) is the
+  only marker — deleting a theme leaves the sites as plain apps.
 
 v1 themes (token-in-fragment + direct API fetch) stop working once the
 platform removes theme-origin CORS: replace your copy of `theme.js` with
