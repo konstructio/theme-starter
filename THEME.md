@@ -31,7 +31,8 @@ what it does for you.
 Allowed ops: `discover`, `zones`, `createZone`, `apps`, `appRepos`,
 `shipApp`, `updateApp`, `deleteApp`, `redeploy`, `buildLogs`, `metrics`,
 `quota`, `character`, `saveCharacter`, `forgeSite`, `forgeSiteJob`,
-`forgeSiteJobs`, `inferSite`, `forgeSiteUpdate`, `domainStatus`.
+`forgeSiteJobs`, `inferSite`, `forgeSiteUpdate`, `domainStatus`,
+`deleteSiteRepo`.
 
 ## Streams (push, not request/response)
 
@@ -126,6 +127,16 @@ v2 additions:
 - Forged sites are identifiable by convention: `repo_url` contains
   `/site-<org>-`. The convention (plus a `konduit-site` GitLab topic) is the
   only marker — deleting a theme leaves the sites as plain apps.
+- `discover().platform_url` is the platform frontend origin — the base for
+  deep links back into the platform (Konduit's app view is
+  `<platform_url>/theme/<org>?zone=<environment>&app=<app_name>`). Never
+  derive this from `document.referrer`.
+- Deleting a forged site is two explicit steps: `deleteApp` removes the app,
+  its build and instances (the git repo survives); then, only if the user
+  opts in, `theme.deleteSiteRepo(org, name)` permanently deletes the
+  `site-<org>-<name>` repository. Repo deletion is TeamAdmin+ (a 403 for
+  developers — offer the app-only path) and is NOT undoable: confirm
+  explicitly, never bundle it silently into app deletion.
 
 v1 themes (token-in-fragment + direct API fetch) stop working once the
 platform removes theme-origin CORS: replace your copy of `theme.js` with

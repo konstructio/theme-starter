@@ -95,6 +95,7 @@ const theme = (() => {
     inferSite: (org, spec) => call("inferSite", org, spec),
     forgeSiteUpdate: (org, spec) => call("forgeSiteUpdate", org, spec),
     domainStatus: (org, name) => call("domainStatus", org, name),
+    deleteSiteRepo: (org, name) => call("deleteSiteRepo", org, name),
     metrics: (org, name, opts) => call("metrics", org, name, opts),
     quota: (org) => call("quota", org),
     character: (org) => call("character", org),
